@@ -1,10 +1,15 @@
 import { Request, Response } from "express";
+import pool from '../database/database'
 
 class IndexController {
   constructor() {}
 
-  lista(req: Request, res: Response): void {
-    res.json({ message: "GET INDEX" });
+  public async lista(req: Request, res: Response): Promise<void> {
+    const result = await pool.then(async(connection)=>{
+      return await connection.query('SELECT * FROM rol')
+    });
+
+    res.json(result);
   }
 
   insertar(req: Request, res: Response): void {
