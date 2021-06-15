@@ -1,4 +1,6 @@
 import { Router} from 'express';
+import {authController} from '../controllers/authController'
+
 
 class AuthRoutes {
     public router: Router = Router();
@@ -7,8 +9,8 @@ class AuthRoutes {
         this.config();
     }
     config(): void {
-        this.router.get('/',(req,res)=>{res.send('GET AuthRoutes')});
-
+        // this.router.get('/',(req,res)=>{res.send('GET AuthRoutes')});
+        this.router.post('/',authController.login);
     }
 
 }
