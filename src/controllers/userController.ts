@@ -15,26 +15,26 @@ class UserController {
 
     /**
      *  Nombre: insert
-     *  Descripcion: insertar datos de un nuevo user
+     *  Descripcion: insertar datos de un nuevo usuario
      *  Resultado: json con mensaje.
      */
     public async insert(req: Request, res: Response) {
         try {
-            const { user, password, idRol } = req.body;
+            const { usuario, password, idRol } = req.body;
         
         // verificar parametros 
-        if(user == null || password == null || idRol == null) {
+        if(usuario == null || password == null || idRol == null) {
             return res.status(409).json({message: "Los campos son requeridos"});
         }
 
         // Verificar longitud de caracteres
         
-        if(user.length > 150){
-            return res.status(500).json({message: "La longitud maxima del user es de 150 caracteres"});
+        if(usuario.length > 150){
+            return res.status(500).json({message: "La longitud maxima del usuario es de 150 caracteres"});
         }
 
-        // Verificar nombre de user
-        const verify = await dao.verifyUser(user);
+        // Verificar nombre de usuario
+        const verify = await dao.verifyUser(usuario);
         if(verify.length > 0){
             return res.status(500).json({message: "El usuario ya existe"});
         }
@@ -50,7 +50,7 @@ class UserController {
 
         // Llenar objetos
         const userObject = {
-            user,
+            usuario,
             password : encryptedPassword,
             idRol
         }

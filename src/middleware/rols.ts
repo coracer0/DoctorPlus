@@ -5,12 +5,12 @@ export const checkRol = (rols: Array<number>) => {
   return async (req: Request, res: Response, next: NextFunction) => {
 
     try {
-        const { idUser } = res.locals.jwtPayLoad;
+        const { idUsuario } = res.locals.jwtPayLoad;
 
-        const isUser = await dao.getUserById(idUser);
+        const isUsuario = await dao.getUserById(idUsuario);
 
-      for (const user of isUser) {
-          if (rols.includes(user.idRol)) {
+      for (const usuario of isUsuario) {
+          if (rols.includes(usuario.idRol)) {
               next();              
           }else{
             res.status(404).json({ message: "No autorizado" });
