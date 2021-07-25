@@ -3,14 +3,14 @@ import pool from "../database/database";
 class UserDAO {
   public async lista() {
     const result = await pool.then(async (connection) => {
-      return await connection.query("SELECT iduser,user,idRol FROM user");
+      return await connection.query("SELECT idUsuario,usuario,idRol FROM usuario");
     });
 
     return result;
   }
-  public async verifyUser(user: string){
+  public async verifyUser(usuario: string){
       const result = await pool.then(async (connection) =>{
-        return await connection.query('SELECT idUser FROM user WHERE user = ?',[user]);
+        return await connection.query('SELECT idUsuario FROM usuario WHERE usuario = ?',[usuario]);
       });
       return result;
   }
@@ -21,9 +21,9 @@ class UserDAO {
       return result;
   }
 
-  public async insert(user:any){
+  public async insert(usuario :any){
     const result =await pool.then(async (connection)=> {
-      return await connection.query('INSERT INTO user set ?',[user])
+      return await connection.query('INSERT INTO usuario set ?',[usuario])
     });
     return result;
   }

@@ -1,17 +1,17 @@
 import pool from "../database/database";
 class AuthDAO {
-  public async getUser(user: String) {
+  public async getUser(usuario: String) {
     const result = await pool.then(async (connection) => {
-      return await connection.query("SELECT * FROM user WHERE user = ?", [
-        user,
+      return await connection.query("SELECT * FROM usuario WHERE usuario JOIN rol  ON usuario.idRol = rol.idRol WHERE usuario = ?", [
+        usuario,
       ]);
     });
     return result;
   }
-  public async getUserById(idUser: number) {
+  public async getUserById(idUsuario: number) {
     const result = await pool.then(async (connection) => {
-      return await connection.query("SELECT * FROM user WHERE idUser = ?", [
-        idUser,
+      return await connection.query("SELECT * FROM usuario WHERE idUsuario = ?", [
+        idUsuario,
       ]);
     });
     return result;
