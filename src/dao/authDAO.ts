@@ -1,8 +1,9 @@
 import pool from "../database/database";
 class AuthDAO {
   public async getUser(usuario: String) {
+    
     const result = await pool.then(async (connection) => {
-      return await connection.query("SELECT * FROM usuario WHERE usuario JOIN rol  ON usuario.idRol = rol.idRol WHERE usuario = ?", [
+      return await connection.query("SELECT idUsuario,usuario,password,idRol FROM usuario WHERE usuario = ?", [
         usuario,
       ]);
     });

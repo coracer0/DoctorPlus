@@ -20,10 +20,10 @@ class UserController {
      */
     public async insert(req: Request, res: Response) {
         try {
-            const { usuario, password, idRol } = req.body;
+            const { usuario, password, nombre, apellido_paterno, apellido_materno,sexo,fecha_nacimiento,idRol  } = req.body;
         
         // verificar parametros 
-        if(usuario == null || password == null || idRol == null) {
+        if(usuario == null || password == null || idRol == null|| nombre==null || apellido_paterno==null || apellido_materno==null ||fecha_nacimiento==null || sexo==null) {
             return res.status(409).json({message: "Los campos son requeridos"});
         }
 
@@ -52,6 +52,11 @@ class UserController {
         const userObject = {
             usuario,
             password : encryptedPassword,
+            nombre,
+            apellido_paterno,
+            apellido_materno,
+            sexo,
+            fecha_nacimiento,
             idRol
         }
 
