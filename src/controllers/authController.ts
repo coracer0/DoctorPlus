@@ -16,6 +16,8 @@ class AuthController{
 
         const usuarios = await dao.getUser(usuario);
 
+      
+
         if (usuarios.length <=0){
             return res.status(400).json({message:'El usuario no existe'});
         }

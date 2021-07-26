@@ -12,7 +12,7 @@ class UserRoutes{
 
     config(): void{
         this.router.get('/',[checkJwt,checkRol([1,2])],userController.lista);
-        this.router.put('/',[checkJwt,checkRol([1])],userController.insert);
+        this.router.put('/',[checkJwt,checkRol([1,2])],userController.insert);
     }
 
 
