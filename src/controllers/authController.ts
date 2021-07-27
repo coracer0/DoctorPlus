@@ -7,14 +7,14 @@ import {utils} from '../utils/utils';
 class AuthController{
 
     public async login(req:Request, res:Response){
-        const{usuario,password} = req.body;
+        const{email,password} = req.body;
         
 
-        if(usuario == null || password == null ){
+        if(email == null || password == null ){
             return res.status(400).json({message: "Usuario y Contraseña incorrecta"});
         }
 
-        const usuarios = await dao.getUser(usuario);
+        const usuarios = await dao.getUser(email);
 
         
 
@@ -24,8 +24,8 @@ class AuthController{
 
         for (const usuario of usuarios) {
             if(await utils.checkPassword(password, usuario.password)){
-                const token = jwt.sign({idUsuario: usuario.idUsuario, usuario,idRol: usuario.idRol, rol: usuario.rol},secretKey.jwtSecret,{expiresIn: '1h'});
-                return res.json({message:'OK',token,idUser: usuario.idUser,usuario,idRol: usuario.idRol, rol: usuario.rol});
+                const token = jwt.sign({idUsuario: usuario.idUsuario, email,idRol: usuario.idRol, rol: usuario.rol},secretKey.jwtSecret,{expiresIn: '1h'});
+                return res.json({message:'OK',token,idUser: usuario.idUser,email,idRol: usuario.idRol, rol: usuario.rol});
             }else{
                 return res.status(400).json({message:"La contraseña es incorrecta"});
             }

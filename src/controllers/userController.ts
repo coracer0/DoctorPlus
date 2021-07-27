@@ -34,21 +34,21 @@ class UserController {
      */
     public async insert(req: Request, res: Response) {
         try {
-            const { usuario, password, nombre, apellido_paterno, apellido_materno,sexo,fecha_nacimiento,idRol  } = req.body;
+            const { email, password, nombre, apellido_paterno, apellido_materno,sexo,fecha_nacimiento,idRol  } = req.body;
         
         // verificar parametros 
-        if(usuario == null || password == null || idRol == null|| nombre==null || apellido_paterno==null || apellido_materno==null ||fecha_nacimiento==null || sexo==null) {
+        if(email == null || password == null || idRol == null|| nombre==null || apellido_paterno==null || apellido_materno==null ||fecha_nacimiento==null || sexo==null) {
             return res.status(409).json({message: "Los campos son requeridos"});
         }
 
         // Verificar longitud de caracteres
         
-        if(usuario.length > 150){
+        if(email.length > 150){
             return res.status(500).json({message: "La longitud maxima del usuario es de 150 caracteres"});
         }
 
         // Verificar nombre de usuario
-        const verify = await dao.verifyUser(usuario);
+        const verify = await dao.verifyUser(email);
         if(verify.length > 0){
             return res.status(500).json({message: "El usuario ya existe"});
         }
@@ -64,7 +64,7 @@ class UserController {
 
         // Llenar objetos
         const userObject = {
-            usuario,
+            email,
             password : encryptedPassword,
             nombre,
             apellido_paterno,

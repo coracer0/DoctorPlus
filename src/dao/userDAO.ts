@@ -4,7 +4,7 @@ class UserDAO {
   public async lista() {
     const result = await pool.then(async (connection) => {
       return await connection.query(
-        "SELECT idUsuario,usuario,idRol FROM usuario"
+        "SELECT idUsuario,email,idRol FROM usuario"
       );
     });
 
@@ -14,7 +14,7 @@ class UserDAO {
   public async listaMedico() {
     const result = await pool.then(async (connection) => {
       return await connection.query(
-        "Select u.idUsuario, usuario, nombre, apellido_paterno, apellido_materno FROM usuario u INNER JOIN medico m on m.idUsuario = u.idUsuario"
+        "Select u.idUsuario, email, nombre, apellido_paterno, apellido_materno FROM usuario u INNER JOIN medico m on m.idUsuario = u.idUsuario"
       );
     });
     return result;
@@ -22,7 +22,7 @@ class UserDAO {
 
   public async listaPaciente(){
     const result=await pool.then(async (connection) =>{
-      return await connection.query("Select u.idUsuario, usuario, nombre, apellido_paterno, apellido_materno FROM usuario u INNER JOIN paciente p on p.idUsuario = u.idUsuario ");
+      return await connection.query("Select u.idUsuario, email, nombre, apellido_paterno, apellido_materno FROM usuario u INNER JOIN paciente p on p.idUsuario = u.idUsuario ");
     });
     return result;
   }
@@ -30,7 +30,7 @@ class UserDAO {
   public async verifyUser(usuario: string) {
     const result = await pool.then(async (connection) => {
       return await connection.query(
-        "SELECT idUsuario FROM usuario WHERE usuario = ?",
+        "SELECT idUsuario FROM usuario WHERE email = ?",
         [usuario]
       );
     });
