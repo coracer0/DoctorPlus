@@ -12,7 +12,10 @@ class UserRoutes{
 
     config(): void{
         this.router.get('/',[checkJwt,checkRol([1,2])],userController.lista);
+        this.router.get('/med/',[checkJwt,checkRol([1])],userController.listaMedicos);
+        this.router.get('/pac/',[checkJwt,checkRol([1])],userController.listaPacientes);
         this.router.put('/',[checkJwt,checkRol([1,2])],userController.insert);
+        
     }
 
 

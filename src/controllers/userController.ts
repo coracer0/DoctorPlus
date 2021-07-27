@@ -13,6 +13,20 @@ class UserController {
         res.json(result);
     }
 
+    /*
+    
+    */
+    public async listaMedicos(req: Request,res :Response){
+        const result = await dao.listaMedico();
+        res.json(result);
+    }
+    /**
+     *
+     */
+    public async listaPacientes(req: Request,res: Response){
+        const result = await dao.listaPaciente();
+        res.json(result);
+    }
     /**
      *  Nombre: insert
      *  Descripcion: insertar datos de un nuevo usuario
